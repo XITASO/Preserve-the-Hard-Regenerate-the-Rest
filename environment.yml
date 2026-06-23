@@ -1,0 +1,11 @@
+name: preserve-the-hard
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11.12
+  - pip=26.1.1
+  - setuptools=75.8.2
+  - wheel
+  - git
+  - pip:
+      - -r requirements.txt

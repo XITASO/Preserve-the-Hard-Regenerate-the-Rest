@@ -1,0 +1,41 @@
+# Reproduces the current reference Docker image inspected on 2026-06-22. The
+# CUDA 11.8 index supplies the pinned PyTorch wheels.
+--extra-index-url https://download.pytorch.org/whl/cu118
+
+torch==2.7.0+cu118
+torchvision==0.22.0+cu118
+numpy==2.2.5
+
+# Diffusion and model ecosystem
+diffusers==0.38.0
+transformers==4.56.2
+accelerate==1.13.0
+safetensors==0.8.0rc1
+sentencepiece==0.2.1
+huggingface-hub==0.36.2
+controlnet-aux==0.0.6
+einops==0.8.2
+
+# Training and experiment tracking
+lightning==2.5.2
+pytorch-lightning==2.6.5
+torchmetrics==1.9.0
+timm==1.0.27
+wandb==0.27.1
+jsonargparse[signatures]==4.49.0
+gitignore-parser==0.1.11
+
+# Images, arrays, and utilities
+albumentations==2.0.8
+opencv-python==4.13.0.92
+opencv-python-headless==4.13.0.92
+Pillow==11.0.0
+matplotlib==3.10.9
+scipy==1.17.1
+tqdm==4.67.1
+protobuf==7.35.0
+PyYAML==6.0.2
+
+# Tests and packaging
+pytest==8.3.5
+setuptools==75.8.2

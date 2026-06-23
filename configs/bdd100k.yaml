@@ -1,0 +1,62 @@
+version: 1
+experiment:
+  name: bdd100k_10pct_iteration1
+dataset:
+  name: bdd100k
+  root: data/bdd100k
+  num_classes: 19
+  ignore_index: 255
+  image_size: 1024
+paths:
+  step1_logs: training_logs/bdd100k/real_only
+  cache: .cached_images4gen/bdd100k/iteration1
+  synthetic: synthetic_data/bdd100k/iteration1
+  step4_logs: training_logs/bdd100k/iteration1
+model:
+  encoder_name: vit_small_patch14_dinov2
+  checkpoint: auto
+selection:
+  selector: highest_entropy_class_multi
+  selector_seed: 0
+  tau: 0.10
+  min_obj_size: 0.0
+  subset_split: 0.10
+  num_samples: 700
+  max_samples: -1
+  every_nth_sample: 1
+  transforms_per_sample: 1
+  square_cache_crops: true
+  cache_crop_size: 1024
+  save_heatmaps: false
+generation:
+  inpainter: sdxl_inpainting
+  model_id: diffusers/stable-diffusion-xl-1.0-inpainting-0.1
+  max_samples: 700
+  context_guidance_strength: 0.0
+  num_steps: 40
+  cfg_guidance_scale: 7.0
+  seed: 42
+  post_process: true
+  guidance_region: not-selected
+  classifier_guidance_schedule: false
+  mask_erosion_kernel: 0
+  image_size: 1024
+training:
+  real_split: 0.10
+  synthetic_split: 1.0
+  baseline_seed: 42
+  fine_tune_seeds: [42, 43, 44, 45, 46]
+  baseline_steps: 20000
+  fine_tune_steps: 20000
+  baseline_patience: 5
+  fine_tune_patience: 5
+  fine_tune_learning_rate: 0.00002
+slurm:
+  use_docker: false
+  conda_env: preserve-the-hard
+smoke:
+  max_samples: 2
+  num_samples: 2
+  train_steps: 2
+  num_steps: 2
+  fine_tune_runs: 1

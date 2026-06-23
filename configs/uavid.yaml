@@ -1,0 +1,62 @@
+version: 1
+experiment:
+  name: uavid_iteration1
+dataset:
+  name: uavid
+  root: temp/uavid_2048to1024
+  num_classes: 8
+  ignore_index: 0
+  image_size: 1024
+paths:
+  step1_logs: training_logs/uavid/real_only
+  cache: .cached_images4gen/uavid/iteration1
+  synthetic: synthetic_data/uavid/iteration1
+  step4_logs: training_logs/uavid/iteration1
+model:
+  encoder_name: vit_small_patch14_dinov2
+  checkpoint: auto
+selection:
+  selector: highest_entropy_class_multi
+  selector_seed: 0
+  tau: 0.15
+  min_obj_size: 0.0
+  subset_split: 1.0
+  num_samples: 200
+  max_samples: -1
+  every_nth_sample: 1
+  transforms_per_sample: 1
+  square_cache_crops: false
+  cache_crop_size: 1024
+  save_heatmaps: false
+generation:
+  inpainter: sdxl_inpainting
+  model_id: diffusers/stable-diffusion-xl-1.0-inpainting-0.1
+  max_samples: 200
+  context_guidance_strength: 0.0
+  num_steps: 40
+  cfg_guidance_scale: 7.0
+  seed: 42
+  post_process: true
+  guidance_region: not-selected
+  classifier_guidance_schedule: false
+  mask_erosion_kernel: 0
+  image_size: 1024
+training:
+  real_split: 1.0
+  synthetic_split: 1.0
+  baseline_seed: 44
+  fine_tune_seeds: [44, 45, 46, 47, 48]
+  baseline_steps: 20000
+  fine_tune_steps: 20000
+  baseline_patience: 3
+  fine_tune_patience: 5
+  fine_tune_learning_rate: 0.00002
+slurm:
+  use_docker: false
+  conda_env: preserve-the-hard
+smoke:
+  max_samples: 2
+  num_samples: 2
+  train_steps: 2
+  num_steps: 2
+  fine_tune_runs: 1

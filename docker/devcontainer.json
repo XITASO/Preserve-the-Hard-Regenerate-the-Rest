@@ -1,0 +1,25 @@
+{
+  "name": "Preserve the Hard (optional Docker)",
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": [
+    "--gpus=all",
+    "--shm-size=16g"
+  ],
+  "containerEnv": {
+    "WANDB_MODE": "offline",
+    "PYTHONPATH": "/workspace/preserve_the_hard"
+  },
+  "workspaceFolder": "/workspace/preserve_the_hard",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter"
+      ]
+    }
+  }
+}
