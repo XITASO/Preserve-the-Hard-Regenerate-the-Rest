@@ -3,8 +3,8 @@
 Official implementation of **"Preserve the Hard, Regenerate the Rest"** —
 uncertainty-guided diffusion augmentation for semantic segmentation.
  
-> **Teaser figure placeholder** — added before the public release.
- 
+![Preserve the Hard, Regenerate the Rest Teaser Figure](./teaser.png)
+
 We train a segmentation model on real images, measure predictive entropy,
 aggregate uncertainty over each ground-truth class, and preserve the most
 uncertain classes until their union exceeds an area budget `τ`. An off-the-shelf
