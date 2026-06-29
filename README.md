@@ -280,9 +280,8 @@ Step 4 reads the recorded suffix from `pipeline_metadata.json`.
  
 ## License
  
-**License selection is pending.** Until a `LICENSE` file is added, no
-open-source license is granted for this code. Cityscapes, BDD100K, UAVID,
-DINOv2, SDXL, and optional model backends remain governed by their own licenses.
+MIT License. 
+Cityscapes, BDD100K, UAVID, DINOv2, SDXL, and optional model backends remain governed by their own licenses.
  
 ## Acknowledgments
  
